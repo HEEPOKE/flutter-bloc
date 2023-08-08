@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/home_bloc.dart';
+import '../widgets/topbar_display.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,12 +16,12 @@ class HomeScreen extends StatelessWidget {
 }
 
 class HomeScreenBody extends StatelessWidget {
-  const HomeScreenBody({super.key});
+ const HomeScreenBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
+      appBar: const TopAppBar(title: "Home", avatarIcon: Icons.account_circle,),
       body: Center(
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
