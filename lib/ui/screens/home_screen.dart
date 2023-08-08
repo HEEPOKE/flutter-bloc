@@ -2,26 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/home_bloc.dart';
 import '../widgets/topbar_display.dart';
+import '../widgets/navigation_drawer.dart' as nav_drawer;
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => HomeBloc(),
-      child: const HomeScreenBody(),
+      child: HomeScreenBody(scaffoldKey: scaffoldKey),
     );
   }
 }
 
 class HomeScreenBody extends StatelessWidget {
- const HomeScreenBody({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> scaffoldKey;
+
+  const HomeScreenBody({Key? key, required this.scaffoldKey}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TopAppBar(title: "Home", avatarIcon: Icons.account_circle,),
+      appBar: const TopAppBar(
+        title: "Home",
+        avatarIcon: Icons.account_circle,
+      ),
+      drawer: const nav_drawer.NavigationDrawer(),
       body: Center(
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {

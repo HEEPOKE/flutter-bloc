@@ -4,7 +4,11 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final IconData avatarIcon;
 
-  const TopAppBar({required this.title, required this.avatarIcon, Key? key}) : super(key: key);
+  const TopAppBar({
+    required this.title,
+    required this.avatarIcon,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -13,17 +17,10 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(title),
-      leading: IconButton(
-        icon: const Icon(Icons.menu),
-        onPressed: () {
-
-        },
-      ),
       actions: [
         IconButton(
           icon: Icon(avatarIcon),
-          onPressed: () {
-          },
+          onPressed: () {},
         ),
       ],
     );
