@@ -1,6 +1,6 @@
-import 'package:app/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-import '../screens/settings_screen.dart';
+import 'package:app/ui/screens/profile_screen.dart';
+import 'package:app/ui/screens/settings_screen.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -30,7 +30,7 @@ class NavigationDrawer extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomeScreen()),
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
               );
             },
           ),
