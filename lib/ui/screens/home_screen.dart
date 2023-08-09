@@ -28,9 +28,8 @@ class HomeScreenBody extends StatelessWidget {
     return Scaffold(
       appBar: const TopAppBar(
         title: "Home",
-        avatarIcon: Icons.more_vert,
       ),
-      drawer: const nav_drawer.NavigationDrawer(),
+      endDrawer: const nav_drawer.NavigationDrawer(),
       body: Center(
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
