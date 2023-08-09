@@ -28,7 +28,7 @@ class HomeScreenBody extends StatelessWidget {
     return Scaffold(
       appBar: const TopAppBar(
         title: "Home",
-        avatarIcon: Icons.account_circle,
+        avatarIcon: Icons.more_vert,
       ),
       drawer: const nav_drawer.NavigationDrawer(),
       body: Center(

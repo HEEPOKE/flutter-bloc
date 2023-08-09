@@ -18,11 +18,36 @@ class NavigationDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text("Item 1"),
+            title: const Row(
+              children: [
+                Icon(Icons.home),
+                SizedBox(width: 8),
+                Text("Home"),
+              ],
+            ),
             onTap: () {},
           ),
           ListTile(
-            title: const Text("Item 2"),
+            title: const Row(
+              children: [
+                Icon(Icons.settings),
+                SizedBox(width: 8),
+                Text("Settings"),
+              ],
+            ),
+            onTap: () {},
+          ),
+          const Divider(
+            color: Colors.black54,
+          ),
+          ListTile(
+            title: const Row(
+              children: [
+                Icon(Icons.logout),
+                SizedBox(width: 8),
+                Text("Logout"),
+              ],
+            ),
             onTap: () {},
           ),
         ],
