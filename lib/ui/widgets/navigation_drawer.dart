@@ -1,4 +1,6 @@
+import 'package:app/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import '../screens/settings_screen.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
@@ -20,12 +22,17 @@ class NavigationDrawer extends StatelessWidget {
           ListTile(
             title: const Row(
               children: [
-                Icon(Icons.home),
+                Icon(Icons.manage_accounts),
                 SizedBox(width: 8),
-                Text("Home"),
+                Text("Profile"),
               ],
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomeScreen()),
+              );
+            },
           ),
           ListTile(
             title: const Row(
@@ -35,7 +42,12 @@ class NavigationDrawer extends StatelessWidget {
                 Text("Settings"),
               ],
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsScreen()),
+              );
+            },
           ),
           const Divider(
             color: Colors.black54,
