@@ -1,9 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:app/ui/screens/profile_screen.dart';
 import 'package:app/ui/screens/settings_screen.dart';
 
 class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({Key? key}) : super(key: key);
+  final FlutterLocalNotificationsPlugin notificationsPlugin;
+
+  const NavigationDrawer({Key? key, required this.notificationsPlugin}) : super(key: key);
+
+  Widget _buildListTile(IconData icon, String title, Function() onTap) {
+    return ListTile(
+      title: Row(
+        children: [
+          Icon(icon),
+          SizedBox(width: 8),
+          Text(title),
+        ],
+      ),
+      onTap: onTap,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,48 +35,33 @@ class NavigationDrawer extends StatelessWidget {
               child: Icon(Icons.person),
             ),
           ),
-          ListTile(
-            title: const Row(
-              children: [
-                Icon(Icons.manage_accounts),
-                SizedBox(width: 8),
-                Text("Profile"),
-              ],
-            ),
-            onTap: () {
+          _buildListTile(
+            Icons.manage_accounts,
+            "Profile",
+            () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const ProfileScreen()),
               );
             },
           ),
-          ListTile(
-            title: const Row(
-              children: [
-                Icon(Icons.settings),
-                SizedBox(width: 8),
-                Text("Settings"),
-              ],
-            ),
-            onTap: () {
+          _buildListTile(
+            Icons.settings,
+            "Settings",
+            () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const SettingsScreen()),
+                MaterialPageRoute(builder: (context) => SettingsScreen(notificationsPlugin: notificationsPlugin)),
               );
             },
           ),
           const Divider(
             color: Colors.black54,
           ),
-          ListTile(
-            title: const Row(
-              children: [
-                Icon(Icons.logout),
-                SizedBox(width: 8),
-                Text("Logout"),
-              ],
-            ),
-            onTap: () {},
+          _buildListTile(
+            Icons.logout,
+            "Logout",
+            () {},
           ),
         ],
       ),

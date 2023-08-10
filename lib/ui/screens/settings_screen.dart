@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+final FlutterLocalNotificationsPlugin notificationsPlugin;
+
+  SettingsScreen({Key? key, required this.notificationsPlugin}) : super(key: key);
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
@@ -12,13 +15,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   int? _selectedTheme = 0;
   final List<String> _themes = ['Light', 'Dark', 'System Default'];
 
-  Widget _buildOption(String title, Widget content) {
-    return ListTile(
-      title: Text(title),
-      trailing: content, // Set the dropdown as the trailing widget
-    );
-  }
-
   Widget _buildNotificationsOption() {
     return ListTile(
       title: const Text('Enable Notifications'),
@@ -28,6 +24,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
         onChanged: (value) {
           setState(() {
             _notificationsEnabled = value;
+            if (_notificationsEnabled) {
+              _showNotification();
+            }
           });
         },
       ),
@@ -35,9 +34,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Widget _buildThemeOption() {
-    return _buildOption(
-      'Select Theme',
-      DropdownButton<int>(
+    return ListTile(
+      title: const Text('Select Theme'),
+      trailing: DropdownButton<int>(
         value: _selectedTheme,
         items: _themes.map((theme) {
           return DropdownMenuItem<int>(
@@ -51,6 +50,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
           });
         },
       ),
+    );
+  }
+
+  void _showNotification() async {
+    const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+      'channel_id',
+      'channel_name',
+      // 'Channel Description',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+
+    const NotificationDetails platformChannelSpecifics = NotificationDetails(android: androidDetails);
+
+    await widget.notificationsPlugin.show(
+      0, // Notification ID
+      'Notification Title',
+      'Notification Body',
+      platformChannelSpecifics,
     );
   }
 

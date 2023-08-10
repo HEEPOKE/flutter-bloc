@@ -6,6 +6,7 @@ import '../widgets/navigation_drawer.dart' as nav_drawer;
 
 class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  
 
   HomeScreen({Key? key}) : super(key: key);
 
@@ -28,8 +29,9 @@ class HomeScreenBody extends StatelessWidget {
     return Scaffold(
       appBar: const TopAppBar(
         title: "Home",
+
       ),
-      endDrawer: const nav_drawer.NavigationDrawer(),
+      endDrawer: nav_drawer.NavigationDrawer(notificationsPlugin: null),
       body: Center(
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
