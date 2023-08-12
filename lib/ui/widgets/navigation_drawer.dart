@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:app/ui/screens/profile_screen.dart';
 import 'package:app/ui/screens/settings_screen.dart';
 
 class NavigationDrawer extends StatelessWidget {
-  final FlutterLocalNotificationsPlugin notificationsPlugin;
 
-  const NavigationDrawer({Key? key, required this.notificationsPlugin}) : super(key: key);
+  const NavigationDrawer({Key? key}) : super(key: key);
 
   Widget _buildListTile(IconData icon, String title, Function() onTap) {
     return ListTile(
@@ -51,7 +49,7 @@ class NavigationDrawer extends StatelessWidget {
             () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SettingsScreen(notificationsPlugin: notificationsPlugin)),
+                MaterialPageRoute(builder: (context) => SettingsScreen()),
               );
             },
           ),

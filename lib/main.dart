@@ -11,13 +11,12 @@ void main() async {
 
   await initializeNoti(flutterLocalNotificationsPlugin);
 
-  runApp(MyApp(notificationsPlugin: flutterLocalNotificationsPlugin));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final FlutterLocalNotificationsPlugin notificationsPlugin;
 
-  const MyApp({Key? key, required this.notificationsPlugin}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

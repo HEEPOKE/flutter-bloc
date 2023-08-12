@@ -1,37 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class SettingsScreen extends StatefulWidget {
-final FlutterLocalNotificationsPlugin notificationsPlugin;
 
-  SettingsScreen({Key? key, required this.notificationsPlugin}) : super(key: key);
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _notificationsEnabled = true;
   int? _selectedTheme = 0;
   final List<String> _themes = ['Light', 'Dark', 'System Default'];
-
-  Widget _buildNotificationsOption() {
-    return ListTile(
-      title: const Text('Enable Notifications'),
-      subtitle: const Text('Receive notifications for updates'),
-      trailing: Switch(
-        value: _notificationsEnabled,
-        onChanged: (value) {
-          setState(() {
-            _notificationsEnabled = value;
-            if (_notificationsEnabled) {
-              _showNotification();
-            }
-          });
-        },
-      ),
-    );
-  }
 
   Widget _buildThemeOption() {
     return ListTile(
@@ -53,25 +32,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  void _showNotification() async {
-    const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-      'channel_id',
-      'channel_name',
-      // 'Channel Description',
-      importance: Importance.max,
-      priority: Priority.high,
-    );
-
-    const NotificationDetails platformChannelSpecifics = NotificationDetails(android: androidDetails);
-
-    await widget.notificationsPlugin.show(
-      0, // Notification ID
-      'Notification Title',
-      'Notification Body',
-      platformChannelSpecifics,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,11 +39,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
         title: const Text('Settings'),
       ),
       body: ListView.builder(
-        itemCount: 2,
+        itemCount: 1,
         itemBuilder: (context, index) {
           if (index == 0) {
-            return _buildNotificationsOption();
-          } else if (index == 1) {
             return _buildThemeOption();
           }
           return const SizedBox.shrink();

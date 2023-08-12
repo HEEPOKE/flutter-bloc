@@ -31,7 +31,7 @@ class HomeScreenBody extends StatelessWidget {
         title: "Home",
 
       ),
-      endDrawer: nav_drawer.NavigationDrawer(notificationsPlugin: null),
+      endDrawer: nav_drawer.NavigationDrawer(),
       body: Center(
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
