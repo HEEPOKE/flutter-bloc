@@ -3,19 +3,19 @@ import 'package:app/ui/screens/profile_screen.dart';
 import 'package:app/ui/screens/settings_screen.dart';
 
 class NavigationDrawer extends StatelessWidget {
-
   const NavigationDrawer({Key? key}) : super(key: key);
 
-  Widget _buildListTile(IconData icon, String title, Function() onTap) {
-    return ListTile(
-      title: Row(
-        children: [
-          Icon(icon),
-          SizedBox(width: 8),
-          Text(title),
-        ],
-      ),
-      onTap: onTap,
+  void _navigateToProfile(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ProfileScreen()),
+    );
+  }
+
+  void _navigateToSettings(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SettingsScreen()),
     );
   }
 
@@ -36,22 +36,12 @@ class NavigationDrawer extends StatelessWidget {
           _buildListTile(
             Icons.manage_accounts,
             "Profile",
-            () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ProfileScreen()),
-              );
-            },
+            () => _navigateToProfile(context),
           ),
           _buildListTile(
             Icons.settings,
             "Settings",
-            () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SettingsScreen()),
-              );
-            },
+            () => _navigateToSettings(context),
           ),
           const Divider(
             color: Colors.black54,
@@ -63,6 +53,19 @@ class NavigationDrawer extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildListTile(IconData icon, String title, Function() onTap) {
+    return ListTile(
+      title: Row(
+        children: [
+          Icon(icon),
+          const SizedBox(width: 8),
+          Text(title),
+        ],
+      ),
+      onTap: onTap,
     );
   }
 }

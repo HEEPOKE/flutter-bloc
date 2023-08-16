@@ -1,50 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../bloc/theme_bloc.dart';
 
-class SettingsScreen extends StatefulWidget {
-
-  const SettingsScreen({Key? key}) : super(key: key);
-
-  @override
-  _SettingsScreenState createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  int? _selectedTheme = 0;
-  final List<String> _themes = ['Light', 'Dark', 'System Default'];
-
-  Widget _buildThemeOption() {
-    return ListTile(
-      title: const Text('Select Theme'),
-      trailing: DropdownButton<int>(
-        value: _selectedTheme,
-        items: _themes.map((theme) {
-          return DropdownMenuItem<int>(
-            value: _themes.indexOf(theme),
-            child: Text(theme),
-          );
-        }).toList(),
-        onChanged: (value) {
-          setState(() {
-            _selectedTheme = value;
-          });
-        },
-      ),
-    );
-  }
-
+class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
       ),
-      body: ListView.builder(
-        itemCount: 1,
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            return _buildThemeOption();
-          }
-          return const SizedBox.shrink();
+      body: BlocBuilder<ThemeBloc, bool>(
+        builder: (context, isDarkTheme) {
+          return Column(
+            children: [
+              SwitchListTile(
+                title: const Text('Dark Mode'),
+                value: isDarkTheme,
+                onChanged: (value) {
+                  context.read<ThemeBloc>().add(ThemeEvent.toggle);
+                },
+              ),
+            ],
+          );
         },
       ),
     );
